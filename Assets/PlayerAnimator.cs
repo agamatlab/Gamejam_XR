@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerAnimator : MonoBehaviour
 {
 
     float direction = 0;
+
     [SerializeField]
     private float animationSpeed = 50;
+
     float animationConstant;
+    public bool isSwinging;
 
     Animator playerAnimator;
 
@@ -23,8 +25,34 @@ public class PlayerAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        playerAnimator.SetFloat("direction", direction);
+        if (isSwinging)
+        {
+            playerAnimator.SetBool("swing1", false);
+        }
+
+
+        isSwinging = playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("swing normal");
+
+        if (Input.GetMouseButtonDown(0) && !isSwinging)
+        {
+            playerAnimator.SetBool("swing1", true);
+            Vector2 mousePosition = Input.mousePosition;
+
+            float screenWidth = Screen.width;
+
+            if (mousePosition.x < screenWidth / 2)
+            {
+                playerAnimator.SetFloat("directionBinary", 0);
+            }
+            else
+            {
+                playerAnimator.SetFloat("directionBinary", 1);
+            }
+
+        }
+
+
+        playerAnimator.SetFloat("directionRange", direction);
 
         float horizontal = Input.GetAxis("Horizontal");
         if(horizontal > 0)
@@ -48,7 +76,6 @@ public class PlayerAnimator : MonoBehaviour
 
         if (horizontal != 0)
         {
-            print(horizontal);
             if(horizontal < 0)
             {
                 playerAnimator.SetBool("facingLeft", true);
@@ -65,15 +92,7 @@ public class PlayerAnimator : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            playerAnimator.SetBool("swing1", true);
-        }
-        else if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("swing normal"))
-        {
-            playerAnimator.SetBool("swing1", false);
 
-        }
 
 
 
