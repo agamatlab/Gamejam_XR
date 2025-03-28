@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float movementSpeed = 10;
     Animator playerAnimator;
     PlayerAnimator playerAniamationScript;
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -17,19 +17,24 @@ public class PlayerMovement : MonoBehaviour
         playerAniamationScript = GetComponentInChildren<PlayerAnimator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-
         float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");  
+
         if (playerAniamationScript.isSwinging)
         {
             rb.velocity = Vector3.zero;
         }
-        else if (horizontal != 0f)
+        else if (horizontal != 0f || vertical != 0f)
         {
-            rb.velocity = new Vector3(1,0,0)*horizontal*movementSpeed;
-        }
 
+            rb.velocity = new Vector3(horizontal, 0, vertical) * movementSpeed;
+        }
+        else
+        {
+
+            rb.velocity = Vector3.zero;
+        }
     }
 }
