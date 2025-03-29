@@ -20,16 +20,16 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");  
+
 
         if (playerAniamationScript.isSwinging)
         {
             rb.velocity = Vector3.zero;
         }
-        else if (horizontal != 0f || vertical != 0f)
+        else if (horizontal != 0f )
         {
 
-            rb.velocity = new Vector3(horizontal, 0, vertical) * movementSpeed;
+            rb.velocity = new Vector3(horizontal, 0, 0) * movementSpeed;
         }
         else
         {
