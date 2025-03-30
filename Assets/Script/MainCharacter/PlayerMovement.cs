@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         balanceIndicatorRightMid = balanceIndicatorCanvas.transform.Find("rightmid").GetComponent<Image>();
 
         balanceIndicatorRight = balanceIndicatorCanvas.transform.Find("right").GetComponent<Image>();
+        
         balancePoint = 4;
         isHoldingRight = true;
         initBalanceIndicator();
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
 
-
+        
         if (Input.GetMouseButtonDown(0) && !playerAniamationScript.isSwinging)
         {
             rb.velocity = Vector3.zero;
@@ -88,7 +89,9 @@ public class PlayerMovement : MonoBehaviour
         }
         if(balancePoint >= 7){
             isHoldingRight = false;
+            balancePoint = 4;
         }
+        rb.AddForce(Vector3.down * 10f, ForceMode.Acceleration);
         updateBalancePointUI();
         
     }
