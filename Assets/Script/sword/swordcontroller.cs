@@ -1,21 +1,29 @@
 using UnityEngine;
 using System.Collections;
+
 public class SwordController : MonoBehaviour
 {
     public enum SwordState { Held, Thrown, Landed }
-
     [SerializeField] private Rigidbody rb;
     [SerializeField] private TrailRenderer trail;
     private Transform originalParent;
+    private Vector3 originalLocalPosition;
+    private Quaternion originalLocalRotation;
     public SwordState state = SwordState.Held;
     PlayerMovement playerMovementScript;
     Transform playerBody;
+
     void Start()
     {
         originalParent = transform.parent;
+        originalLocalPosition = transform.localPosition;
+        originalLocalRotation = transform.localRotation;
+
         if (rb == null) rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
+
         if (trail != null) trail.emitting = false;
+
         playerMovementScript = GetComponentInParent<PlayerMovement>();
         gameObject.layer = 3;
         playerBody = GameObject.Find("Player").transform;
@@ -27,7 +35,7 @@ public class SwordController : MonoBehaviour
         rb.isKinematic = false;
         rb.AddForce(direction * force, ForceMode.Impulse);
         state = SwordState.Thrown;
-        
+
         if (trail != null) trail.emitting = true;
     }
 
@@ -35,10 +43,11 @@ public class SwordController : MonoBehaviour
     {
         rb.isKinematic = true;
         transform.SetParent(originalParent);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
+        transform.localPosition = originalLocalPosition;
+        transform.localRotation = originalLocalRotation;
         state = SwordState.Held;
         playerMovementScript.isHoldingRight = true;
+
         if (trail != null) trail.emitting = false;
     }
 
@@ -52,34 +61,30 @@ public class SwordController : MonoBehaviour
     }
 
     public bool IsHeld => state == SwordState.Held;
+
     IEnumerator DelayedAction()
     {
-        
         yield return new WaitForSeconds(0.4f);
-
-        
         Throw(new Vector3(5, 2, 0), 1f);
     }
 
-    bool check2DCollide(){
+    bool check2DCollide()
+    {
         float x1 = transform.position.x;
         float x2 = playerBody.position.x;
-        float diff = x1-x2;
-        if(diff < 1&& diff >-1){
-            return true;
-        }
-        return false;
+        float diff = x1 - x2;
+        return diff < 1 && diff > -1;
     }
+
     void Update()
     {
-
         if (state == SwordState.Held && !playerMovementScript.isHoldingRight)
         {
-
             StartCoroutine(DelayedAction());
             state = SwordState.Thrown;
         }
-        if(state == SwordState.Landed && check2DCollide()){
+        if (state == SwordState.Landed && check2DCollide())
+        {
             Retake();
         }
     }
