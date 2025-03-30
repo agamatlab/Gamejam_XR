@@ -17,7 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private Image balanceIndicatorRightMid;
 
     private Image balanceIndicatorRight;
+    public int balancePoint;
 
+    public bool isHoldingRight;
 
     void Start()
     {
@@ -33,7 +35,8 @@ public class PlayerMovement : MonoBehaviour
         balanceIndicatorRightMid = balanceIndicatorCanvas.transform.Find("rightmid").GetComponent<Image>();
 
         balanceIndicatorRight = balanceIndicatorCanvas.transform.Find("right").GetComponent<Image>();
-
+        balancePoint = 4;
+        isHoldingRight = true;
         initBalanceIndicator();
 
     }
@@ -51,13 +54,26 @@ public class PlayerMovement : MonoBehaviour
         rectTransform5.anchoredPosition = new Vector2(600, -500);
         balanceIndicatorMid.color = Color.red;
     }
+
+    void updateBalancePointUI()
+    {
+        balanceIndicatorLeft.color = (balancePoint == 2) ? Color.red : Color.white;
+        balanceIndicatorLeftMid.color = (balancePoint == 3) ? Color.red : Color.white;
+        balanceIndicatorMid.color = (balancePoint == 4) ? Color.red : Color.white;
+        balanceIndicatorRightMid.color = (balancePoint == 5) ? Color.red : Color.white;
+        balanceIndicatorRight.color = (balancePoint == 6) ? Color.red : Color.white;
+    }
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
 
 
-        if (playerAniamationScript.isSwinging)
+        if (Input.GetMouseButtonDown(0) && !playerAniamationScript.isSwinging)
         {
+            rb.velocity = Vector3.zero;
+            balancePoint +=1;
+        }
+        else if(playerAniamationScript.isSwinging){
             rb.velocity = Vector3.zero;
         }
         else if (horizontal != 0f)
@@ -70,5 +86,10 @@ public class PlayerMovement : MonoBehaviour
 
             rb.velocity = Vector3.zero;
         }
+        if(balancePoint >= 7){
+            isHoldingRight = false;
+        }
+        updateBalancePointUI();
+        
     }
 }

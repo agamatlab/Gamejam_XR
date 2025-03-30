@@ -48,7 +48,7 @@ public class PlayerAnimator : MonoBehaviour
             {
                 playerAnimator.SetFloat("directionBinary", 1);
             }
-
+            
         }
 
 
