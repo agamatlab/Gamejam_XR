@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SwordController : MonoBehaviour
 {
-    public enum SwordState { Held, Thrown, Landed }
+    public enum SwordState { Held, Thrown, Landed };
     [SerializeField] private Rigidbody rb;
     [SerializeField] private TrailRenderer trail;
     private Transform originalParent;
@@ -65,7 +65,14 @@ public class SwordController : MonoBehaviour
     IEnumerator DelayedAction()
     {
         yield return new WaitForSeconds(0.4f);
-        Throw(new Vector3(5, 2, 0), 1f);
+        if (!playerMovementScript.facingLeft)
+        {
+            Throw(new Vector3(5, 2, 0), 1f);
+        }
+        else
+        {
+            Throw(new Vector3(-5, 2, 0), 1f);
+        }
     }
 
     bool check2DCollide()

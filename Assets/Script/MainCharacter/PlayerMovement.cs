@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isHoldingRight;
 
+    public bool facingLeft;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         
         balancePoint = 4;
         isHoldingRight = true;
+        facingLeft = false;
         initBalanceIndicator();
 
     }
@@ -81,6 +83,11 @@ public class PlayerMovement : MonoBehaviour
         {
 
             rb.velocity = new Vector3(horizontal, 0, 0) * movementSpeed;
+            if(horizontal > 0){
+                facingLeft = false;
+            }else{
+                facingLeft = true;
+            }
         }
         else
         {
