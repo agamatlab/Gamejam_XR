@@ -35,14 +35,14 @@ public class PlayerAnimator : MonoBehaviour
 
         isSwinging = playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("swing normal");
 
-        if (Input.GetMouseButtonDown(0) && !isSwinging)
+        if (Input.GetMouseButtonDown(0) && !isSwinging && (playerMovementScript.balancePoint == 6 || playerMovementScript.isHoldingRight))
         {
             playerAnimator.SetBool("swing1", true);
             Vector2 mousePosition = Input.mousePosition;
 
             float screenWidth = Screen.width;
             playerAnimator.SetFloat("directionBinary", 1);
-
+            playerMovementScript.balancePoint +=1;
             if (mousePosition.x < screenWidth / 2)
             {
                 playerAnimator.SetFloat("directionBinary", 0);

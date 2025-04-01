@@ -71,10 +71,10 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
 
         
-        if (Input.GetMouseButtonDown(0) && !playerAniamationScript.isSwinging)
+        if (Input.GetMouseButtonDown(0) && !playerAniamationScript.isSwinging &&  isHoldingRight)
         {
             rb.velocity = Vector3.zero;
-            balancePoint +=1;
+            
         }
         else if(playerAniamationScript.isSwinging){
             rb.velocity = Vector3.zero;
