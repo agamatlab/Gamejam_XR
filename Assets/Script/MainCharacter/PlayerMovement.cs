@@ -46,15 +46,15 @@ public class PlayerMovement : MonoBehaviour
     void initBalanceIndicator()
     {
         RectTransform rectTransform1 = balanceIndicatorLeft.GetComponent<RectTransform>();
-        rectTransform1.anchoredPosition = new Vector2(0, -500);
+        rectTransform1.anchoredPosition = new Vector2(0, -0.2f * Screen.height);
         RectTransform rectTransform2 = balanceIndicatorLeftMid.GetComponent<RectTransform>();
-        rectTransform2.anchoredPosition = new Vector2(150, -500);
+        rectTransform2.anchoredPosition = new Vector2(0.1f*Screen.width, -0.2f * Screen.height);
         RectTransform rectTransform3 = balanceIndicatorMid.GetComponent<RectTransform>();
-        rectTransform3.anchoredPosition = new Vector2(300, -500);
+        rectTransform3.anchoredPosition = new Vector2(0.15f*Screen.width, -0.2f * Screen.height);
         RectTransform rectTransform4 = balanceIndicatorRightMid.GetComponent<RectTransform>();
-        rectTransform4.anchoredPosition = new Vector2(450, -500);
+        rectTransform4.anchoredPosition = new Vector2(0.2f*Screen.width, -0.2f * Screen.height);
         RectTransform rectTransform5 = balanceIndicatorRight.GetComponent<RectTransform>();
-        rectTransform5.anchoredPosition = new Vector2(600, -500);
+        rectTransform5.anchoredPosition = new Vector2(0.25f*Screen.width, -0.2f * Screen.height);
         balanceIndicatorMid.color = Color.red;
     }
 
