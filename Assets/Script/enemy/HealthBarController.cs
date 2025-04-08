@@ -34,6 +34,6 @@ public class HealthBarController : MonoBehaviour
 
 
         healthbar.transform.rotation = Quaternion.LookRotation(mainCamera.transform.forward);
-        healthbar.value = (float)(enemyController.health/100f);
+        healthbar.value = (float)(enemyController.health);
     }
 }
