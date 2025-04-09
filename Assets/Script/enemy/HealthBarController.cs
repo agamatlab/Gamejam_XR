@@ -13,9 +13,9 @@ public class HealthBarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject enemy = GameObject.Find("Banana Man");
-        enemyTransform = enemy.transform;
-
+        //GameObject enemy = GameObject.Find("Banana Man");
+        enemyTransform = transform.parent.parent;
+        GameObject enemy =enemyTransform.gameObject;
         Transform body = enemy.transform.Find("Body");
         enemyController = body.GetComponent<EnemyController>();
 

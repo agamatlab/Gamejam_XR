@@ -12,7 +12,8 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy = GameObject.Find("Banana Man");
+        enemy = transform.parent.gameObject;
+        //enemy = GameObject.Find("Banana Man");
         GameObject player = GameObject.Find("Player");
         Transform exportedKnight = player.transform.Find("exported knight");
         playerAnimator = exportedKnight.GetComponent<PlayerAnimator>();
