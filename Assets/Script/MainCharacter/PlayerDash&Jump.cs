@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Dash ²ÎÊý
-    public float dashForce = 10f; // ³å´ÌµÄÁ¦¶È
-    public float dashDuration = 0.2f; // ³å´ÌµÄ³ÖÐøÊ±¼ä
-    public float dashCooldown = 1f; // ³å´ÌµÄÀäÈ´Ê±¼ä
+    // Dash ï¿½ï¿½ï¿½ï¿½
+    public float dashForce = 10f; // ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½
+    public float dashDuration = 0.2f; // ï¿½ï¿½ÌµÄ³ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    public float dashCooldown = 1f; // ï¿½ï¿½Ìµï¿½ï¿½ï¿½È´Ê±ï¿½ï¿½
     private bool isDashing = false;
     private bool isDashCooldown = false;
     private float dashTimer = 0f;
     private float dashCooldownTimer = 0f;
 
-    // Jump ²ÎÊý
-    public float jumpForce = 5f; // ÌøÔ¾Ê±Ê©¼ÓµÄÁ¦µÄ´óÐ¡
-    public float jumpDuration = 0.5f; // Ê©¼ÓÁ¦µÄ³ÖÐøÊ±¼ä
-    public float jumpCooldown = 1f; // ÌøÔ¾ÀäÈ´Ê±¼ä£¨Ãë£©
+    // Jump ï¿½ï¿½ï¿½ï¿½
+    public float jumpForce = 5f; // ï¿½ï¿½Ô¾Ê±Ê©ï¿½Óµï¿½ï¿½ï¿½ï¿½Ä´ï¿½Ð¡
+    public float jumpDuration = 0.5f; // Ê©ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    public float jumpCooldown = 1f; // ï¿½ï¿½Ô¾ï¿½ï¿½È´Ê±ï¿½ä£¨ï¿½ë£©
     private bool isJumping = false;
     private float jumpTimer = 0f;
-    private float lastJumpTime = -1f; // ¼ÇÂ¼ÉÏÒ»´ÎÌøÔ¾µÄÊ±¼ä
+    private float lastJumpTime = -1f; // ï¿½ï¿½Â¼ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½Ê±ï¿½ï¿½
 
     private Rigidbody rb;
 
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void HandleDash()
     {
-        // ÀäÈ´Ê±¼ä¼ÆÊ±
+        // ï¿½ï¿½È´Ê±ï¿½ï¿½ï¿½Ê±
         if (isDashCooldown)
         {
             dashCooldownTimer += Time.deltaTime;
@@ -45,13 +45,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // °´ÏÂ³å´Ì¼üÇÒ²»ÔÚ³å´Ì»òÀäÈ´×´Ì¬
+        // ï¿½ï¿½ï¿½Â³ï¿½Ì¼ï¿½ï¿½Ò²ï¿½ï¿½Ú³ï¿½Ì»ï¿½ï¿½ï¿½È´×´Ì¬
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && !isDashCooldown)
         {
             StartDash();
         }
 
-        // ³å´Ì¼ÆÊ±
+        // ï¿½ï¿½Ì¼ï¿½Ê±
         if (isDashing)
         {
             dashTimer += Time.deltaTime;
@@ -67,49 +67,49 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         dashTimer = 0f;
 
-        // »ñÈ¡Íæ¼ÒÊäÈë·½Ïò
-        float horizontal = Input.GetAxis("Horizontal"); // A/D »ò×óÓÒ·½Ïò¼ü
-        float vertical = Input.GetAxis("Vertical");     // W/S »òÉÏÏÂ·½Ïò¼ü
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë·½ï¿½ï¿½
+        float horizontal = Input.GetAxis("Horizontal"); // A/D ï¿½ï¿½ï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½ï¿½
+        float vertical = Input.GetAxis("Vertical");     // W/S ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½
 
-        // ¼ÆËã³å´Ì·½Ïò
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½ï¿½ï¿½
         Vector3 dashDirection = new Vector3(horizontal, 0f, vertical).normalized;
 
-        // Èç¹ûÍæ¼ÒÃ»ÓÐÊäÈë·½Ïò£¬Ä¬ÈÏÏòÇ°³å´Ì
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ë·½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½
         if (dashDirection.magnitude < 0.1f)
         {
             dashDirection = transform.forward;
         }
 
-        // Ê©¼Ó³å´ÌÁ¦
+        // Ê©ï¿½Ó³ï¿½ï¿½ï¿½ï¿½
         rb.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
     }
 
     void StopDash()
     {
         isDashing = false;
-        isDashCooldown = true; // ½øÈëÀäÈ´×´Ì¬
-        rb.velocity = Vector3.zero; // Í£Ö¹³å´ÌºóµÄËÙ¶È
+        isDashCooldown = true; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´×´Ì¬
+        rb.velocity = Vector3.zero; // Í£Ö¹ï¿½ï¿½Ìºï¿½ï¿½ï¿½Ù¶ï¿½
     }
 
     void HandleJump()
     {
-        // ¼ì²âÍæ¼ÒÊÇ·ñ°´ÏÂÌøÔ¾¼ü£¨Ä¬ÈÏÊÇ¿Õ¸ñ¼ü£©£¬²¢ÇÒ²»´¦ÓÚÌøÔ¾×´Ì¬
-        // Í¬Ê±¼ì²éÊÇ·ñÔÚÀäÈ´Ê±¼äÄÚ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½Ç¿Õ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾×´Ì¬
+        // Í¬Ê±ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ï¿½ï¿½ï¿½
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping && CanJump())
         {
             StartJump();
         }
 
-        // Èç¹ûÔÚÌøÔ¾×´Ì¬£¬³ÖÐøÊ©¼ÓÁ¦
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê©ï¿½ï¿½ï¿½ï¿½
         if (isJumping)
         {
             jumpTimer += Time.deltaTime;
 
-            // ¼ÆËãÁ¦µÄ´óÐ¡£¨ËæÊ±¼äË¥¼õ£©
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ë¥ï¿½ï¿½ï¿½ï¿½
             float forceMultiplier = 1f - (jumpTimer / jumpDuration);
             rb.AddForce(Vector3.up * jumpForce * forceMultiplier, ForceMode.Force);
 
-            // ÌøÔ¾Ê±¼ä½áÊø
+            // ï¿½ï¿½Ô¾Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
             if (jumpTimer >= jumpDuration)
             {
                 StopJump();
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
     bool CanJump()
     {
-        // ¼ì²éµ±Ç°Ê±¼äÊÇ·ñ³¬¹ýÁËÉÏÒ»´ÎÌøÔ¾Ê±¼ä¼ÓÉÏÀäÈ´Ê±¼ä
+        // ï¿½ï¿½éµ±Ç°Ê±ï¿½ï¿½ï¿½Ç·ñ³¬¹ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ô¾Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ï¿½
         return Time.time >= lastJumpTime + jumpCooldown;
     }
 
