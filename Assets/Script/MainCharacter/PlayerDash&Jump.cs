@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private float dashCooldownTimer = 0f;
 
     // Jump ����
-    public float jumpForce = 5f; // ��Ծʱʩ�ӵ����Ĵ�С
+    public float jumpForce = 30f; // ��Ծʱʩ�ӵ����Ĵ�С
     public float jumpDuration = 0.5f; // ʩ�����ĳ���ʱ��
     public float jumpCooldown = 1f; // ��Ծ��ȴʱ�䣨�룩
     private bool isJumping = false;

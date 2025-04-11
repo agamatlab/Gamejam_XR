@@ -860,6 +860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 663159707}
   - component: {fileID: 663159706}
+  - component: {fileID: 663159708}
   m_Layer: 0
   m_Name: MapCreator
   m_TagString: Untagged
@@ -881,7 +882,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterEnemy: {fileID: 0}
   player: {fileID: 0}
-  numberOfClones: 2
+  grass: {fileID: 0}
+  land: {fileID: 0}
+  numberOfEnemy: 2
+  numberOfGrass: 2
+  map: {fileID: 0}
 --- !u!4 &663159707
 Transform:
   m_ObjectHideFlags: 0
@@ -897,6 +902,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &663159708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663159705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4f907196277a64d8abb3a37cf91c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,7 +980,7 @@ GameObject:
   - component: {fileID: 891830361}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1077,7 +1094,7 @@ Transform:
   m_GameObject: {fileID: 891830354}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 2.2, z: 0}
   m_LocalScale: {x: 0.32, y: 0.46399993, z: 0.37333328}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1117,7 +1134,7 @@ MonoBehaviour:
   dashForce: 30
   dashDuration: 1
   dashCooldown: 1
-  jumpForce: 20
+  jumpForce: 30
   jumpDuration: 1
   jumpCooldown: 1
 --- !u!4 &908446610 stripped
@@ -1711,8 +1728,8 @@ Transform:
   m_GameObject: {fileID: 1347672104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.13, z: 0}
-  m_LocalScale: {x: 112.36, y: 0.59, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1758,12 +1775,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.011
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.44
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
         type: 3}
@@ -3203,6 +3220,7 @@ MonoBehaviour:
   alive: 0
   health: 0
   enemy: {fileID: 0}
+  player: {fileID: 0}
   hasCollided: 0
 --- !u!1 &1869789256
 GameObject:
@@ -3584,7 +3602,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 112.36, y: 4.26, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
