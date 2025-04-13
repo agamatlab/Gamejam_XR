@@ -8,13 +8,14 @@ public class EnemyController : MonoBehaviour
     public int health;
     private PlayerAnimator playerAnimator;
     public GameObject enemy;
+    public GameObject player;
     public bool hasCollided;
     // Start is called before the first frame update
     void Start()
     {
         enemy = transform.parent.gameObject;
         //enemy = GameObject.Find("Banana Man");
-        GameObject player = GameObject.Find("Player");
+        player =GameObject.FindWithTag("Player");
         Transform exportedKnight = player.transform.Find("exported knight");
         playerAnimator = exportedKnight.GetComponent<PlayerAnimator>();
         alive = true;
