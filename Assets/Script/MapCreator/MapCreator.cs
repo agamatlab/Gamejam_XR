@@ -9,8 +9,8 @@ public class MapCreator : MonoBehaviour
     public GameObject grass;
     public GameObject land;
     public int numberOfEnemy = 2;
-    public int numberOfGrass = 2;
-    public Map map;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +22,10 @@ public class MapCreator : MonoBehaviour
         land.transform.localScale = new Vector3(1, 1, 1);
         grass.transform.position = new Vector3(0, -3, 0);//lets hide it from the screen
         land.transform.position = new Vector3(0, -4, 0);
+        
         player.transform.position = new Vector3(0, 2.2f, 0);
         masterEnemy.transform.position = new Vector3(2, 1.5f, 0);
-        map = GetComponent<Map>();
+        
         for (int i = 0; i < numberOfEnemy; i++)
         {
 
@@ -32,7 +33,14 @@ public class MapCreator : MonoBehaviour
             clone.transform.position += new Vector3((i + 1) * 5, 0, 0);
 
         }
-        int [,] mapArray = map.map;
+        
+        int [,] mapArray = new int[,]
+                {
+            { 0, 0,0,0,0,0,0,0,0,0 },
+            { 0, 0,0,0,0,0,0,0,0,0 },
+            { 1, 1,1,1,1,1,1,1,1,1 },
+            { 2, 2,2,2,2,2,2,2,2,2 },
+                };
         int rows = mapArray.GetLength(0);
         int cols = mapArray.GetLength(1);
         for (int i = 0; i < rows; i++)
