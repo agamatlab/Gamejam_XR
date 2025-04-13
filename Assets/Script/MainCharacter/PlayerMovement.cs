@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
         if(balancePoint >= 7){
-            isHoldingRight = false;
+            //isHoldingRight = false;
             balancePoint = 4;
         }
         rb.AddForce(Vector3.down * 10f, ForceMode.Acceleration);
