@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
@@ -16,6 +17,17 @@ public class PlayerAnimator : MonoBehaviour
     Animator playerAnimator;
     PlayerMovement playerMovementScript;
 
+    public GameObject StrongAttackMiniGame;
+
+    // Used for attacks and combos
+
+
+    public float comboTimerLimit = 2f;
+    private float comboTimer;
+    public float attackCooldownLimit;
+    private float attackCooldown = 0; 
+    private int currentCombo = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,17 +39,75 @@ public class PlayerAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isSwinging)
+        Vector3 transformPosition = transform.position;
+        transformPosition.z = 0;
+        transform.position = transformPosition;
+
+        // Canceling all previously  set animations
+        playerAnimator.SetBool("swing1", false);
+        playerAnimator.SetBool("swing2", false);
+        playerAnimator.SetBool("swing3", false);
+
+
+        if(attackCooldown > 0)attackCooldown -= Time.deltaTime;
+        if(comboTimer > 0)comboTimer -= Time.deltaTime;
+
+        if (comboTimer <= 0)
         {
-            playerAnimator.SetBool("swing1", false);
+            currentCombo = 0;
         }
+        //Debug.Log(comboTimer + " " + currentCombo);
 
 
         isSwinging = playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("swing normal");
 
         if (Input.GetMouseButtonDown(0) && !isSwinging && (playerMovementScript.balancePoint == 6 || playerMovementScript.isHoldingRight))
         {
-            playerAnimator.SetBool("swing1", true);
+            if(currentCombo == 0 && attackCooldown <= 0)
+            {
+                playerAnimator.SetBool("swing1", true);
+                attackCooldown = attackCooldownLimit;
+                comboTimer = comboTimerLimit;
+                currentCombo++;
+                Debug.Log("first attack");
+            }
+            else if(currentCombo == 1 && attackCooldown <= 0)
+            {
+                playerAnimator.SetBool("swing2", true);
+                attackCooldown = attackCooldownLimit;
+                comboTimer = comboTimerLimit;
+                currentCombo++;
+
+                Debug.Log("second attack");
+                StrongAttackMiniGame.SetActive(true);
+                // Here I will spawn a slider and if the player presses the button again in a certain time frame, it will trigger the third attack
+
+            }
+            else if (currentCombo == 2 && attackCooldown <= 0)
+            {
+                bool onTime = StrongAttackMiniGame.GetComponent<ClockSwingCursor>().IsCursorInTargetArea();
+
+                if (onTime)
+                {
+
+                    playerAnimator.SetBool("swing3", true);
+                    attackCooldown = attackCooldownLimit;
+                    currentCombo = 0;
+
+                    Debug.Log("third attack");
+                }
+                else
+                {
+                    Debug.Log("You are such a failure");
+                }
+                StrongAttackMiniGame.SetActive(false);
+
+            }
+            else
+            {
+                return;
+            }
+
             Vector2 mousePosition = Input.mousePosition;
 
             float screenWidth = Screen.width;
