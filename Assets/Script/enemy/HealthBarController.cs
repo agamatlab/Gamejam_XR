@@ -15,9 +15,9 @@ public class HealthBarController : MonoBehaviour
     {
         //GameObject enemy = GameObject.Find("Banana Man");
         enemyTransform = transform.parent.parent;
-        GameObject enemy =enemyTransform.gameObject;
-        Transform body = enemy.transform.Find("Body");
-        enemyController = body.GetComponent<EnemyController>();
+        //GameObject enemy =enemyTransform.gameObject;
+        //Transform body = enemy.transform.Find("Body");
+        enemyController = enemyTransform.GetComponent<EnemyController>();
 
         healthbar = GetComponent<Slider>();
         offset = new Vector3(0, 1, 0);

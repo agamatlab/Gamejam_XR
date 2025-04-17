@@ -48,14 +48,16 @@ public class enemyAnimator : MonoBehaviour
 
     bool checkPlayerInRange()
     {
-        
+
         float x1 = transform.position.x;
         float x2 = playerBody.position.x;
         float diff = x1 - x2;
-        if(diff > 0 && diff < alertRange && runningLeft ){
+        if (diff > 0 && diff < alertRange && runningLeft)
+        {
             return true;
         }
-        if(diff < 0 && diff > -alertRange && !runningLeft){
+        if (diff < 0 && diff > -alertRange && !runningLeft)
+        {
             return true;
         }
         return false;
@@ -65,7 +67,7 @@ public class enemyAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         Vector3 screenPosition = mainCamera.WorldToScreenPoint(transform.position + UIoffset);
         alertIndicator.transform.position = screenPosition;
         alertIndicator.transform.rotation = Quaternion.LookRotation(mainCamera.transform.forward);
@@ -101,15 +103,33 @@ public class enemyAnimator : MonoBehaviour
         else
         {
             alertIndicator.color = Color.red;
-            if(transform.position.x - playerBody.position.x > 0){
-                                transform.position += new Vector3(-alertSpeed, 0, 0);
-                animator.SetBool("runningLeft", true);
-                runningLeft = true;
+            if (transform.position.x - playerBody.position.x > 0)
+            {
+                if (transform.position.x - playerBody.position.x > 0.8)
+                {
+                    animator.SetBool("attack", false);
+                    transform.position += new Vector3(-alertSpeed, 0, 0);
+                    animator.SetBool("runningLeft", true);
+                    runningLeft = true;
+                }
+                else
+                {
+                    animator.SetBool("attack", true);
+                }
             }
-            else{
-                                transform.position += new Vector3(alertSpeed, 0, 0);
-                animator.SetBool("runningLeft", false);
-                runningLeft = false;
+            else
+            {
+                if (transform.position.x - playerBody.position.x < -0.8)
+                {
+                    animator.SetBool("attack", false);
+                    transform.position += new Vector3(alertSpeed, 0, 0);
+                    animator.SetBool("runningLeft", false);
+                    runningLeft = false;
+                }
+                else
+                {
+                    animator.SetBool("attack", true);
+                }
             }
         }
     }

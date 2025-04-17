@@ -15,7 +15,7 @@ public class MapCreator : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        masterEnemy = GameObject.Find("Banana Man");
+        masterEnemy = GameObject.Find("swordenemy");
         grass = GameObject.Find("grass");
         land = GameObject.Find("Cube");
         grass.transform.localScale = new Vector3(1, 1, 1);
@@ -36,10 +36,10 @@ public class MapCreator : MonoBehaviour
         
         int [,] mapArray = new int[,]
                 {
-            { 0, 0,0,0,0,0,0,0,0,0 },
-            { 0, 0,0,0,0,0,0,0,0,0 },
-            { 1, 1,1,1,1,1,1,1,1,1 },
-            { 2, 2,2,2,2,2,2,2,2,2 },
+            { 0, 0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0 },
+            { 0, 0,0,0,0,0,0,0,0,0, 0, 0,0,0,0,0,0,0,0,0},
+            { 1, 1,1,1,1,1,1,1,1,1,1, 1,1,1,1,1,1,1,1,1 },
+            { 2, 2,2,2,2,2,2,2,2,2,0, 0,0,0,0,0,0,0,0,0 },
                 };
         int rows = mapArray.GetLength(0);
         int cols = mapArray.GetLength(1);
