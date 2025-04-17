@@ -23,8 +23,8 @@ public class MapCreator : MonoBehaviour
         grass.transform.position = new Vector3(0, -3, 0);//lets hide it from the screen
         land.transform.position = new Vector3(0, -4, 0);
         
-        player.transform.position = new Vector3(0, 2.2f, 0);
-        masterEnemy.transform.position = new Vector3(2, 1.5f, 0);
+        player.transform.position = new Vector3(5, 2.2f, 0);
+        masterEnemy.transform.position = new Vector3(8, 1.5f, 0);
         
         for (int i = 0; i < numberOfEnemy; i++)
         {
