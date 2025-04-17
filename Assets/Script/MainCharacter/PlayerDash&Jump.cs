@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerDashJump : MonoBehaviour
 {
     // Dash ����
     public float dashForce = 10f; // ��̵�����

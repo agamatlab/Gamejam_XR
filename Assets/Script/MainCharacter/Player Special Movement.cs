@@ -1,23 +1,19 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerSpecialMovement : MonoBehaviour
 {
     // Dash parameters
     public float dashForce = 10f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
-    private bool isDashing = false;
-    private bool isDashCooldown = false;
-    private float dashTimer = 0f;
-    private float dashCooldownTimer = 0f;
+
 
     // Jump parameters
     public float jumpForce = 30f;
     public float jumpDuration = 0.5f;
     public float jumpCooldown = 1f;
     private bool isJumping = false;
-    private float jumpTimer = 0f;
-    private float lastJumpTime = -1f;
+
 
     // Ground detection parameters
     public float groundCheckDistance = 0.5f;
@@ -29,7 +25,7 @@ public class PlayerController : MonoBehaviour
     // Movement parameters
     public float moveSpeed = 5f;
     public float airControl = 0.5f;
-    private float verticalVelocity;
+
 
     private Rigidbody rb;
     private CapsuleCollider col;
@@ -118,6 +114,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // 保持原有Dash和Jump代码不变，以下省略...
-    // (Original dash and jump code remains unchanged here)
+  
+    // (Original dash and jump code remains unchanged)
 }

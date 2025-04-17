@@ -69,6 +69,7 @@
     <Compile Include="Assets\CursorBeh.cs" />
     <Compile Include="Assets\Script\MainCharacter\PlayerAnimator.cs" />
     <Compile Include="Assets\Script\enemy\HealthBarController.cs" />
+    <Compile Include="Assets\Script\MainCharacter\Player Special Movement.cs" />
     <Compile Include="Assets\Script\MainCharacter\PlayerDash&amp;Jump.cs" />
     <Compile Include="Assets\Script\MainCharacter\PlayerMovement.cs" />
     <Compile Include="Assets\Script\Camera\CameraFollow.cs" />
