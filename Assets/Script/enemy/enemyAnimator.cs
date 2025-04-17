@@ -20,7 +20,7 @@ public class enemyAnimator : MonoBehaviour
     public float alertRange;
     private Transform playerBody;
     public bool runningLeft;
-
+    public bool attack;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +43,7 @@ public class enemyAnimator : MonoBehaviour
         rectTransform.anchoredPosition = new Vector2(0.05f * Screen.width, -0.2f * Screen.height);
         rectTransform.sizeDelta = new Vector2(0.02f * Screen.width, 0.02f * Screen.width);
         alertIndicator.color = Color.green;
+        attack = false;
     }
 
 
@@ -108,12 +109,14 @@ public class enemyAnimator : MonoBehaviour
                 if (transform.position.x - playerBody.position.x > 0.8)
                 {
                     animator.SetBool("attack", false);
+                    attack = false;
                     transform.position += new Vector3(-alertSpeed, 0, 0);
                     animator.SetBool("runningLeft", true);
                     runningLeft = true;
                 }
                 else
                 {
+                    attack = true;
                     animator.SetBool("attack", true);
                 }
             }
@@ -121,6 +124,7 @@ public class enemyAnimator : MonoBehaviour
             {
                 if (transform.position.x - playerBody.position.x < -0.8)
                 {
+                    attack = false;
                     animator.SetBool("attack", false);
                     transform.position += new Vector3(alertSpeed, 0, 0);
                     animator.SetBool("runningLeft", false);
@@ -128,6 +132,7 @@ public class enemyAnimator : MonoBehaviour
                 }
                 else
                 {
+                    attack = true;
                     animator.SetBool("attack", true);
                 }
             }
